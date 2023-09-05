@@ -1,16 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useState } from "react";
-
-const getAllRecipes = async () => {
-  const response = await fetch("https://localhost:7055/api/Recipes");
-  const data = await response.json();
-
-  console.log({ data });
-
-  return data.recipes;
-};
 
 const LIKE_SVG = (
   <svg
@@ -29,25 +17,24 @@ const LIKE_SVG = (
   </svg>
 );
 
-export const AllRecipes = () => {
-  const [recipes, setRecipes] = useState([]);
+export const RecipeGrid = ({ recipes = [] }) => {
+  console.log("recipes123", recipes);
 
-  useEffect(() => {
-    getAllRecipes().then((recipes) => {
-      console.log({ recipes });
-      setRecipes(recipes);
-    });
-  }, []);
+  if (!recipes.length) {
+    return <div className="text-center">No recipes found</div>;
+  }
 
   return (
-    <div className="flex gap-4 flex-row">
+    <div className="flex gap-4 flex-col md:flex-row">
       {recipes.map((recipe) => (
-        <div className="flex flex-col">
-          <Image src={recipe.photos[0].url} width={300} height={400} />
+        <div className="flex flex-col w-full md:max-w-sm">
+          <Image src={recipe.photos[0].url} width={400} height={600} />
           <div className="flex justify-between items-center p-2">
             <div>
               <h3>{recipe.title}</h3>
-              <p className="text-sm text-slate-500">By Lucho</p>
+              <p className="text-sm text-slate-500">
+                By Lucho • {recipe.prepatarionTimeMinutes} min
+              </p>
             </div>
             <div>
               <button>{LIKE_SVG}</button>

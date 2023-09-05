@@ -4,31 +4,40 @@ import { useEffect, useState } from "react";
 import { Select } from "./Select";
 
 export const getIngredients = async () => {
-  return fetch("https://localhost:7055/api/ingredients")
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      return data.ingredients;
-    })
-    .catch((error) => {
-      console.log(error);
-      return [];
-    });
+  const response = await fetch("https://localhost:7055/api/ingredients");
+  const data = await response.json();
+
+  console.log("ingredients", data.ingredients);
+
+  return data.ingredients;
 };
 
 export const IngredientSelect = () => {
-  const [ingredients, setIngredients] = useState([]);
+  const [options, setOptions] = useState([]); // [{ label: "Ingredientes", value: null }
 
   useEffect(() => {
-    getIngredients().then((ingredients) => setIngredients(ingredients));
+    getIngredients().then((ingredients) => {
+      console.log("ingredients2", ingredients);
+
+      const a = ingredients.map((ingredient) => ({
+        label: ingredient.name,
+        value: ingredient.id,
+      }));
+
+      console.log("a", a);
+
+      setOptions(a);
+    });
   }, []);
 
-  const options = ingredients.map((ingredient) => ({
-    label: ingredient.name,
-    value: ingredient.id,
-  }));
+  console.log({ options }, "ingOptions");
 
-  console.log({ options });
-
-  return <Select options={options} />;
+  return (
+    <Select
+      options={[{ label: "Ingredientes", value: 0 }, ...options]}
+      multile={true}
+      selectKey="ingredient-select"
+      name="ingredients"
+    />
+  );
 };
