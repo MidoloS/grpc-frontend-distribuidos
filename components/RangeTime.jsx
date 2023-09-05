@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export const RangeTime = () => {
-  const [minutes, setMinutes] = useState(0);
+  const [minutes, setMinutes] = useState(120);
 
   const handleChange = (e) => {
     const { value } = e.target;
