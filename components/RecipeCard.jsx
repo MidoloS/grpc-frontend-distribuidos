@@ -89,7 +89,7 @@ export const RecipeCard = ({ recipe, recipes }) => {
       </div>
       <div className="flex justify-between items-center p-2">
         <div>
-          <h3>{recipe.title}</h3>
+          <h3 className="font-medium">{recipe.title}</h3>
           <p className="text-sm text-slate-500">
             By Lucho • {recipe.prepatarionTimeMinutes} min
           </p>
