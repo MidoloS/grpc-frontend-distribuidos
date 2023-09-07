@@ -12,7 +12,7 @@ const handleSubmit = async (e) => {
 
   console.log("body", JSON.stringify(data));
 
-  const response = await fetch("https://localhost:7055/api/User/login", {
+  const response = await fetch("https://localhost:7055/api/user/login", {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
