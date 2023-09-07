@@ -1,5 +1,10 @@
+"use client";
+
+import Link from "next/link";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { useEffect, useState } from "react";
+import { getCookie } from "@/helpers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,18 +30,47 @@ const APP_LOGO = (
 );
 
 export default function RootLayout({ children }) {
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const userIdCookie = getCookie("userId");
+
+    setUserId(userIdCookie);
+  }, []);
+
+  const signedIn = userId !== null;
+
+  const handleSignOut = () => {
+    document.cookie = `userId=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+    document.cookie = `userName=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+    window.location.href = "/signin";
+  };
+
+  const signedButtons = (
+    <div className="flex gap-6">
+      <button onClick={handleSignOut}>Cerrar Sesion</button>
+    </div>
+  );
+
+  const unsignedButtons = (
+    <div className="flex gap-6">
+      <Link href="/signin">Sign In</Link>
+      <Link
+        href="/signup"
+        className="bg-slate-950 text-slate-50 px-4 py-2 rounded-lg"
+      >
+        Sign Up
+      </Link>
+    </div>
+  );
+
   return (
     <html lang="en">
       <body>
         <header className="border-b ">
           <div className="container mx-auto flex justify-between p-6 items-center">
             <div>{APP_LOGO}</div>
-            <div className="flex gap-6">
-              <button>Sign In</button>
-              <button className="bg-slate-950 text-slate-50 px-4 py-2 rounded-lg">
-                Sign Up
-              </button>
-            </div>
+            {signedIn ? signedButtons : unsignedButtons}
           </div>
         </header>
         {children}

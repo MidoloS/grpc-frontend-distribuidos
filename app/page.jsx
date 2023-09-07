@@ -5,6 +5,7 @@ import { CategoriesSelect } from "@/components/CategoriesSelect";
 import { IngredientSelect } from "@/components/IngredientSelect";
 import { useEffect, useState } from "react";
 import { RangeTime } from "@/components/RangeTime";
+import { getCookie } from "@/helpers";
 
 const getAllRecipes = async ({
   title = ".",
@@ -27,10 +28,33 @@ const getAllRecipes = async ({
   return data.recipies;
 };
 
+const getFavRecipes = async (userId) => {
+  const response = await fetch(
+    `https://localhost:7055/api/Recipes/favorites/${userId}`
+  );
+
+  const data = await response.json();
+
+  console.log("recipe res", data);
+
+  return data.recipies;
+};
+
 export default function Home() {
   const [recipes, setRecipes] = useState([]);
+  const [activeTab, setActiveTab] = useState("all");
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
+    const userIdCookie = getCookie("userId");
+    setUserId(userIdCookie);
+
+    console.log({ userIdCookie });
+
+    if (!userIdCookie) {
+      window.location.href = "/signin";
+    }
+
     getAllRecipes().then((data) => {
       console.log({ data });
       setRecipes(data);
@@ -63,6 +87,10 @@ export default function Home() {
     setRecipes(recipes);
   };
 
+  const activeClass =
+    "bg-slate-950 text-slate-50 px-4 py-2 font-semibold rounded-md";
+  const inactiveClass = "bg-slate-50 text-slate-950 rounded-md";
+
   return (
     <main className="container mx-auto p-8">
       <form
@@ -71,6 +99,9 @@ export default function Home() {
         method="GET"
         onSubmit={handleSubmit}
       >
+        <h1 className="font-medium text-lg">
+          Bienvenido/a {getCookie("userName")}!
+        </h1>
         <div className="flex gap-4">
           <input
             type="text"
@@ -90,9 +121,41 @@ export default function Home() {
           <IngredientSelect />
         </div>
         <RangeTime />
-
-        <RecipeGrid recipes={recipes} />
       </form>
+
+      <div className="flex gap-4 py-4">
+        <button
+          className={activeTab === "all" ? activeClass : inactiveClass}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log("all click");
+            setActiveTab("all");
+            getAllRecipes().then((data) => {
+              console.log({ data });
+              setRecipes(data);
+            });
+          }}
+        >
+          Todos
+        </button>
+        <button
+          className={activeTab === "fav" ? activeClass : inactiveClass}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log("fav click");
+            setActiveTab("fav");
+            getFavRecipes(userId).then((data) => {
+              console.log({ data });
+              setRecipes(data);
+            });
+          }}
+        >
+          Favoritos
+        </button>
+      </div>
+      <RecipeGrid recipes={recipes} />
     </main>
   );
 }
