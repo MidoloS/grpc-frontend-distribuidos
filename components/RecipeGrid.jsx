@@ -10,8 +10,8 @@ export const RecipeGrid = ({ recipes = [] }) => {
 
   return (
     <div className="flex gap-4 flex-col md:flex-row">
-      {recipes.map((recipe) => (
-        <RecipeCard recipe={recipe} />
+      {recipes.map((recipe, index) => (
+        <RecipeCard recipe={recipe} key={index} />
       ))}
     </div>
   );
