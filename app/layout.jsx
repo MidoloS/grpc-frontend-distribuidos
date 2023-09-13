@@ -4,7 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
-import { getCookie } from "@/helpers";
+import { getCookie } from "../helpers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -49,11 +49,11 @@ export default function RootLayout({ children }) {
   const signedButtons = (
     <div className="flex gap-6">
       <Link
-       href="/recipe/upload"
-       className="bg-slate-950 text-slate-50 px-4 py-2 rounded-lg"
-     >
-       Subir receta
-     </Link>
+        href="/recipe/upload"
+        className="bg-slate-950 text-slate-50 px-4 py-2 rounded-lg"
+      >
+        Subir receta
+      </Link>
       <button onClick={handleSignOut}>Cerrar Sesion</button>
     </div>
   );

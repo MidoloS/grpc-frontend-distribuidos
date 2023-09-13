@@ -1,7 +1,7 @@
 "use client";
 
-import { CategoriesSelect } from "@/components/CategoriesSelect";
-import { IngredientSelect } from "@/components/IngredientSelect";
+import { CategoriesSelect } from "../../../components/CategoriesSelect";
+import { IngredientSelect } from "../../../components/IngredientSelect";
 import { getCookie } from "../../../helpers";
 import { RangeTime } from "../../../components/RangeTime";
 
@@ -29,7 +29,7 @@ const handleSubmit = async (e) => {
       stepts: [],
     };
 
-    await fetch("https://localhost:7055/api/Recipes", {
+    const response = await fetch("https://localhost:7055/api/Recipes", {
       method: "POST",
       body: JSON.stringify(recipe),
       headers: {
@@ -37,9 +37,16 @@ const handleSubmit = async (e) => {
       },
     });
 
+    console.log({ response });
+
+    if (response.status !== 200) {
+      alert("Error al subir la receta, faltan datos");
+      return;
+    }
+
     window.location.href = "/";
   } catch (error) {
-    alert("Error al subir la receta");
+    alert("Error al subir la receta, faltan datos");
   }
 };
 
