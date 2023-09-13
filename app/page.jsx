@@ -28,7 +28,7 @@ const getAllRecipes = async ({
   return data.recipies;
 };
 
-const getFavRecipes = async (userId) => {
+export const getFavRecipes = async (userId) => {
   const response = await fetch(
     `https://localhost:7055/api/Recipes/favorites/${userId}`
   );

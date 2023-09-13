@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
     setUserId(userIdCookie);
   }, []);
 
-  const signedIn = userId !== null;
+  const signedIn = !!userId;
 
   const handleSignOut = () => {
     document.cookie = `userId=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
@@ -48,6 +48,12 @@ export default function RootLayout({ children }) {
 
   const signedButtons = (
     <div className="flex gap-6">
+      <Link
+       href="/recipe/upload"
+       className="bg-slate-950 text-slate-50 px-4 py-2 rounded-lg"
+     >
+       Subir receta
+     </Link>
       <button onClick={handleSignOut}>Cerrar Sesion</button>
     </div>
   );
