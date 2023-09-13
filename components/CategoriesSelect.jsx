@@ -12,7 +12,7 @@ export const getCategories = async () => {
   return data.categorys;
 };
 
-export const CategoriesSelect = () => {
+export const CategoriesSelect = ({ required }) => {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
@@ -32,9 +32,10 @@ export const CategoriesSelect = () => {
 
   return (
     <Select
-      options={[{ label: "Categoria", value: 0 }, ...options]}
+      options={[{ label: "Categoria", value: null }, ...options]}
       selectKey="category-select"
       name="category"
+      required={required}
     />
   );
 };

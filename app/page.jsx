@@ -1,11 +1,11 @@
 "use client";
 
-import { RecipeGrid } from "@/components/RecipeGrid";
-import { CategoriesSelect } from "@/components/CategoriesSelect";
-import { IngredientSelect } from "@/components/IngredientSelect";
+import { RecipeGrid } from "../components/RecipeGrid";
+import { CategoriesSelect } from "../components/CategoriesSelect";
+import { IngredientSelect } from "../components/IngredientSelect";
 import { useEffect, useState } from "react";
-import { RangeTime } from "@/components/RangeTime";
-import { getCookie } from "@/helpers";
+import { RangeTime } from "../components/RangeTime";
+import { getCookie } from "../helpers";
 
 const getAllRecipes = async ({
   title = ".",
@@ -28,7 +28,7 @@ const getAllRecipes = async ({
   return data.recipies;
 };
 
-const getFavRecipes = async (userId) => {
+export const getFavRecipes = async (userId) => {
   const response = await fetch(
     `https://localhost:7055/api/Recipes/favorites/${userId}`
   );

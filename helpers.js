@@ -1,4 +1,8 @@
 export function getCookie(cname) {
+  if (typeof window === "undefined") {
+    return "";
+  }
+
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
   let ca = decodedCookie.split(";");

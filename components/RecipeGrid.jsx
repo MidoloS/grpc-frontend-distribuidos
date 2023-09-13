@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { RecipeCard } from "./RecipeCard";
 
 export const RecipeGrid = ({ recipes = [] }) => {
@@ -9,7 +8,7 @@ export const RecipeGrid = ({ recipes = [] }) => {
   }
 
   return (
-    <div className="flex gap-4 flex-col md:flex-row">
+    <div className="flex gap-4 flex-col md:grid lg:grid-cols-4 md:grid-cols-3">
       {recipes.map((recipe, index) => (
         <RecipeCard recipe={recipe} key={index} />
       ))}
