@@ -50,9 +50,10 @@ export const LikeButton = ({ recipe }) => {
       const isLiked = likesRecipes.some(
         (like) => like.idReciepe === recipe?.idReciepe
       );
+      console.log({ isLiked, likesRecipes });
       setLiked(isLiked);
     })();
-  }, []);
+  }, [recipe]);
 
   const handleClick = () => {
     console.log("llego", recipe, recipe?.idReciepe);

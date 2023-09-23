@@ -37,7 +37,7 @@ export const RecipeCard = ({ recipe, recipes }) => {
     <div className="flex flex-col w-full md:max-w-sm">
       <div id="image-slider" className="relative">
         <Image
-          src={(recipe?.photos || [])[imgPage || 0].url || ""}
+          src={(recipe?.photos || [])[imgPage || 0]?.url || ""}
           width={400}
           height={600}
           alt="recipe"
