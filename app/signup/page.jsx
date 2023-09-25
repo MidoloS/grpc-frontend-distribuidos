@@ -1,34 +1,45 @@
 "use client";
 
 const handleSubmit = async (e) => {
-  e.preventDefault();
-  e.stopPropagation();
+  try {
+    e.preventDefault();
+    e.stopPropagation();
 
-  const formData = new FormData(e.target);
+    const formData = new FormData(e.target);
 
-  const data = Object.fromEntries(formData.entries());
+    const data = Object.fromEntries(formData.entries());
 
-  console.log({ data });
+    console.log({ data });
 
-  const response = await fetch("https://localhost:7055/api/Users/login", {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+    const response = await fetch("https://localhost:7055/api/user", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  const res = await response.json();
+    if (response.status !== 200) {
+      alert("Error al crear el usuario");
+      return;
+    }
 
-  console.log({ res });
+    const res = await response.json();
 
-  //   create session cookie if res is { idUser: number, username: string }
-  const { idUser, username } = res;
+    console.log({ res });
 
-  if (idUser && username) {
-    document.cookie = `user=${idUser}; path=/`;
-    document.cookie = `username=${username}; path=/`;
-    window.location.href = "/";
+    //   create session cookie if res is { idUser: number, username: string }
+    const { idUser, username } = res;
+
+    if (idUser && username) {
+      document.cookie = `user=${idUser}; path=/`;
+      document.cookie = `username=${username}; path=/`;
+      window.location.href = "/";
+    }
+
+    window.location.href = "/signin";
+  } catch (error) {
+    alert("Error al crear el usuario");
   }
 };
 
@@ -44,21 +55,22 @@ export default function Home() {
         <input
           type="text"
           className="border border-slate-300 p-2 rounded-md text-slate-600 w-full max-w-md"
-          name="title"
+          name="name"
           placeholder="Nombre completo"
         />
         <input
           type="text"
           className="border border-slate-300 p-2 rounded-md text-slate-600 w-full max-w-md"
-          name="title"
+          name="userName"
           placeholder="Usuario"
         />
         <input
-          type="text"
+          type="email"
           className="border border-slate-300 p-2 rounded-md text-slate-600 w-full max-w-md"
-          name="title"
+          name="email"
           placeholder="email@example.com"
         />
+        <input type="lastName" name="lastName" hidden value="" />
         <input
           type="password"
           className="border border-slate-300 p-2 rounded-md text-slate-600 w-full max-w-md"

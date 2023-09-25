@@ -18,6 +18,16 @@ const handleSubmit = async (e) => {
       .split(",")
       .map((url) => ({ url: url.trim(), id: -1 }));
 
+    if (images.length === 0) {
+      alert("Error al subir la receta, faltan fotos");
+      return;
+    }
+
+    if (images.length > 5) {
+      alert("Error al subir la receta, solo se permiten 5 fotos");
+      return;
+    }
+
     const recipe = {
       title: data.title,
       description: data.description,

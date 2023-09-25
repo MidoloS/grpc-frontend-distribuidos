@@ -47,7 +47,7 @@ export default function RootLayout({ children }) {
   };
 
   const signedButtons = (
-    <div className="flex gap-6">
+    <div className="flex gap-6 items-center">
       <Link
         href="/recipe/upload"
         className="bg-slate-950 text-slate-50 px-4 py-2 rounded-lg"
@@ -59,7 +59,7 @@ export default function RootLayout({ children }) {
   );
 
   const unsignedButtons = (
-    <div className="flex gap-6">
+    <div className="flex gap-6 items-center">
       <Link href="/signin">Sign In</Link>
       <Link
         href="/signup"
