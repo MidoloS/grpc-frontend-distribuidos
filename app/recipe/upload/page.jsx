@@ -63,7 +63,7 @@ const handleSubmit = async (e) => {
 export default function Home() {
   return (
     <main className="container mx-auto p-8">
-      <h1 className="font-medium text-lg">Subir receta</h1>
+      <h1 className="font-medium text-2xl text-center mb-10">Subir receta</h1>
       <form
         action="/api/Recipes"
         className="flex flex-col  items-center gap-4"

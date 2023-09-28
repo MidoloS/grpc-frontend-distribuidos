@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-export const RangeTime = () => {
-  const [minutes, setMinutes] = useState(120);
+export const RangeTime = ({ defaultValue = 60 }) => {
+  const [minutes, setMinutes] = useState(defaultValue);
 
   const handleChange = (e) => {
     const { value } = e.target;

@@ -36,21 +36,20 @@ const ACTIVE_LIKE = (
 
 export const LikeButton = ({ recipe }) => {
   const [liked, setLiked] = useState(false);
+  const [favRecipes, setFavRecipes] = useState([]);
 
   if (!recipe?.idReciepe) {
     return null;
   }
 
   useEffect(() => {
-    console.log("uwu");
     const userId = getCookie("userId") || -1;
     (async () => {
-      console.log(userId, "userId");
       const likesRecipes = await getFavRecipes(userId);
+      setFavRecipes(likesRecipes);
       const isLiked = likesRecipes.some(
         (like) => like.idReciepe === recipe?.idReciepe
       );
-      console.log({ isLiked, likesRecipes });
       setLiked(isLiked);
     })();
   }, [recipe]);

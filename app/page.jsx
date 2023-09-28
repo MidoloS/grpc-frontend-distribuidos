@@ -11,10 +11,11 @@ const getAllRecipes = async ({
   title = ".",
   prepTime = 120,
   category = 0,
+  ingredientId = 0,
 } = {}) => {
   console.log(1, prepTime);
   const response = await fetch(
-    `https://localhost:7055/api/Recipes?title=${title}&prepTime=${prepTime}&categoryId=${category}`,
+    `https://localhost:7055/api/Recipes?title=${title}&prepTime=${prepTime}&categoryId=${category}&ingredientId=${ingredientId}`,
     {
       method: "GET",
     }
@@ -80,6 +81,7 @@ export default function Home() {
       title,
       category,
       prepTime,
+      ingredientId: ingredients[0],
     });
 
     console.log({ recipes });

@@ -75,7 +75,7 @@ export default function RootLayout({ children }) {
       <body>
         <header className="border-b ">
           <div className="container mx-auto flex justify-between p-6 items-center">
-            <div>{APP_LOGO}</div>
+            <Link href="/">{APP_LOGO}</Link>
             {signedIn ? signedButtons : unsignedButtons}
           </div>
         </header>

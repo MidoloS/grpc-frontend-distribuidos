@@ -12,7 +12,7 @@ export const getIngredients = async () => {
   return data.ingredients;
 };
 
-export const IngredientSelect = ({ required }) => {
+export const IngredientSelect = ({ required, defaultValue }) => {
   const [options, setOptions] = useState([]); // [{ label: "Ingredientes", value: null }
 
   useEffect(() => {
@@ -35,10 +35,11 @@ export const IngredientSelect = ({ required }) => {
   return (
     <Select
       required={required}
-      options={[{ label: "Ingredientes", value: null }, ...options]}
+      options={[{ label: "Ingredientes", value: -1 }, ...options]}
       multile={true}
       selectKey="ingredient-select"
       name="ingredients"
+      defaultValue={defaultValue}
     />
   );
 };
