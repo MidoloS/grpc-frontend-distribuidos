@@ -5,7 +5,12 @@ import { ImageSlider } from "../../../components/ImageSlider";
 
 import { FollowButton } from "../../../components/FollowButton";
 import { LikeButton } from "../../../components/LikeButton";
+import ComentariosReceta from '../../../components/ComentariosReceta';
+import ComentarReceta from '../../../components/ComentarReceta';
+import CalificarReceta from '../../../components/CalificarReceta';
+import { getCookie } from "../../../helpers";
 import Link from "next/link";
+
 
 export default function Home() {
   const [recipe, setRecipe] = useState({});
@@ -55,8 +60,13 @@ export default function Home() {
             </div>
           </div>
           <p className="text-slate-800">{recipe?.description}</p>
+          <p className="text-slate-800">Popularidad: {recipe?.popularity}</p>
+          <p className="text-slate-800">Calificación Promedio: {recipe?.averageRanking}</p>
         </div>
       </div>
+      <CalificarReceta recipeId={recipe.idReciepe} recipeUserId = {recipe.user.id} userId={Number(getCookie("userId"))} />
+      <ComentarReceta recipeId={recipe.idReciepe} userId={Number(getCookie("userId"))} />
+      <ComentariosReceta recipeId={recipe.idReciepe} />
     </main>
   );
 }

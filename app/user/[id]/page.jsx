@@ -38,6 +38,7 @@ export default function Home() {
           <FollowButton user={user} />
         </div>
       </div>
+      <p className="text-slate-800">Popularidad: {user?.popularity}</p>
 
       <h2 className="text-slate-950 font-medium text-lg mb-3">Recetas</h2>
       <RecipeGrid recipes={recipes} />
