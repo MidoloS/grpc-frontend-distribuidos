@@ -48,6 +48,9 @@ export default function RootLayout({ children }) {
 
   const signedButtons = (
     <div className="flex gap-6 items-center">
+      <Link href="/messages" className="bg-slate-950 text-slate-50 px-4 py-2 rounded-lg">
+      Correo
+      </Link>
       <Link
         href="/recipe/upload"
         className="bg-slate-950 text-slate-50 px-4 py-2 rounded-lg"

@@ -31,7 +31,7 @@ const ComentariosReceta = ({ recipeId }) => {
             style={{
               display: 'flex',
               backgroundColor: '#fff',
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Somos más oscura
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', 
               borderRadius: '8px',
               padding: '10px',
               marginBottom: '10px',
