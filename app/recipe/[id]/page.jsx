@@ -8,7 +8,9 @@ import { LikeButton } from "../../../components/LikeButton";
 import ComentariosReceta from '../../../components/ComentariosReceta';
 import ComentarReceta from '../../../components/ComentarReceta';
 import CalificarReceta from '../../../components/CalificarReceta';
+import DenunciarReceta from '../../../components/DenunciarReceta'
 import { getCookie } from "../../../helpers";
+
 import Link from "next/link";
 
 
@@ -64,6 +66,7 @@ export default function Home() {
           <p className="text-slate-800">Calificación Promedio: {recipe?.averageRanking}</p>
         </div>
       </div>
+      <DenunciarReceta recipeId={recipe.idReciepe} recipeUserId = {recipe.user.id} userId={Number(getCookie("userId"))} />
       <CalificarReceta recipeId={recipe.idReciepe} recipeUserId = {recipe.user.id} userId={Number(getCookie("userId"))} />
       <ComentarReceta recipeId={recipe.idReciepe} userId={Number(getCookie("userId"))} />
       <ComentariosReceta recipeId={recipe.idReciepe} />
