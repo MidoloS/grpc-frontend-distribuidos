@@ -62,7 +62,7 @@ const handleSubmit = async (e) => {
     if (res.status === 400) {
       alert("Error al subir la receta, faltan datos");
     } else {
-      // window.location.href = "/";
+      window.location.href = "/";
     }
   } catch (error) {
     alert("Error al subir la receta, faltan datos");

@@ -48,12 +48,16 @@ export default function RootLayout({ children }) {
 
   const signedButtons = (
     <div className="flex gap-6 items-center">
+      <Link href="/recipe/upload/massive">Carga masiva</Link>
+      <Link href="/recipe/draft">Borradores</Link>
+      <Link href="/recipe/book">Recetarios</Link>
       <Link
         href="/recipe/upload"
         className="bg-slate-950 text-slate-50 px-4 py-2 rounded-lg"
       >
         Subir receta
       </Link>
+
       <button onClick={handleSignOut}>Cerrar Sesion</button>
     </div>
   );

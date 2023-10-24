@@ -9,9 +9,9 @@ import { getCookie } from "../helpers";
 
 const getAllRecipes = async ({
   title = ".",
-  prepTime = 120,
-  category = 0,
-  ingredientId = 0,
+  prepTime = 0,
+  category = -1,
+  ingredientId = -1,
 } = {}) => {
   console.log(1, prepTime);
   const response = await fetch(
@@ -87,6 +87,8 @@ export default function Home() {
     console.log({ recipes });
 
     setRecipes(recipes);
+
+    console.log("handle submit");
   };
 
   const activeClass =

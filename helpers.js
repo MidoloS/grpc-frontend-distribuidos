@@ -17,3 +17,54 @@ export function getCookie(cname) {
   }
   return "";
 }
+
+export const sendDraft = async (draft) => {
+  const raw = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://localhost:8000/draft">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:createMassive>
+         <web:name>${JSON.stringify(draft)}</web:name>
+      </web:createMassive>
+   </soapenv:Body>
+</soapenv:Envelope>`;
+
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/soap+xml",
+    },
+    mode: "cors",
+    body: raw,
+  };
+
+  await fetch("http://localhost:8000", requestOptions);
+};
+
+export const getDraftRecipes = async (userId) => {
+  const raw = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://localhost:8000/draft">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:createMassive>
+         <web:name>${userId}</web:name>
+      </web:createMassive>
+   </soapenv:Body>
+</soapenv:Envelope>`;
+
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/soap+xml",
+    },
+    mode: "cors",
+    body: raw,
+  };
+
+  try {
+    const response = await fetch("http://localhost:8000", requestOptions);
+    const xml = await response.text();
+
+    console.log({ xml, response });
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -6,13 +6,16 @@ import { ImageSlider } from "../../../components/ImageSlider";
 import { FollowButton } from "../../../components/FollowButton";
 import { LikeButton } from "../../../components/LikeButton";
 import Link from "next/link";
+import { ModalCreateBookItem } from "../../../components/ModalCreateBookItem";
 
 export default function Home() {
   const [recipe, setRecipe] = useState({});
+  const [id, setId] = useState("");
 
   useEffect(() => {
     const currentUrl = window.location.href;
     const id = currentUrl.split("/")[4];
+    setId(id);
 
     console.log("hola", id);
     console.log({ id });
@@ -50,8 +53,13 @@ export default function Home() {
                 • {recipe.prepatarionTimeMinutes} min
               </p>
             </div>
-            <div className="w-12 h-12 border border-slate-300 rounded-md flex items-center justify-center">
-              <LikeButton recipe={recipe} />
+            <div className="flex justify-center items-center gap-4">
+              <div className="w-12 h-12 border border-slate-300 rounded-md flex items-center justify-center">
+                <LikeButton recipe={recipe} />
+              </div>
+              <div>
+                <ModalCreateBookItem recipeId={id} />
+              </div>
             </div>
           </div>
           <p className="text-slate-800">{recipe?.description}</p>
