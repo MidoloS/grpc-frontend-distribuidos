@@ -6,7 +6,6 @@ export default function DenunciarReceta({ recipeId, recipeUserId, userId }) {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
   useEffect(() => {
-    // Realizar una solicitud a tu API para obtener la lista de motivos
     fetch('http://127.0.0.1:8000/api/motivos')
       .then(response => response.json())
       .then(data => {

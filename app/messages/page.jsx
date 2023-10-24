@@ -53,7 +53,7 @@ const styles = {
     listStyle: 'none',
     padding: 0,
     margin: 0,
-    width: '200px', //Ancho de la lista 
+    width: '200px',
   },
   button: {
     border: 'none',
