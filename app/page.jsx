@@ -4,6 +4,9 @@ import { RecipeGrid } from "../components/RecipeGrid";
 import { CategoriesSelect } from "../components/CategoriesSelect";
 import { IngredientSelect } from "../components/IngredientSelect";
 import { useEffect, useState } from "react";
+import TopUsers from "../components/TopUsers";
+import Novedades from "../components/Novedades";
+import TopRecipes from "../components/TopRecipes";
 import { RangeTime } from "../components/RangeTime";
 import { getCookie } from "../helpers";
 
@@ -97,6 +100,8 @@ export default function Home() {
 
   return (
     <main className="container mx-auto p-8">
+      <h2>Novedades</h2>
+      <div><Novedades /></div>
       <form
         action=""
         className="flex flex-col gap-4"
@@ -158,6 +163,16 @@ export default function Home() {
         >
           Favoritos
         </button>
+      </div>
+      <div className="flex">
+        <div className="w-1/4 pl-4">
+          {/* Componente TopUsers */}
+          <TopUsers />
+        </div>
+        <div className="w-1/4 pl-4">
+          {/* Componente TopRecipes */}
+          <TopRecipes />
+        </div>
       </div>
       <RecipeGrid recipes={recipes} />
     </main>
